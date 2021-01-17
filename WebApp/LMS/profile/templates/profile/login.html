@@ -1,0 +1,15 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Авторизация{% endblock %}
+
+{% block content %}
+    <div class="reg_log">
+        <div class="reg_log_text">Авторизация</div>
+     <form method="post">
+         {% csrf_token %}
+         {{ form }}<br>
+
+         <button class="btn btn-warning" type="submit">Вход</button>
+
+        </form>
+{% endblock %}

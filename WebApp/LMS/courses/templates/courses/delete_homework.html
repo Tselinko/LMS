@@ -1,0 +1,37 @@
+{% extends 'courses/course_layout.html' %}
+
+{% block url1 %}"{% url 'course_material_home' homework.course.id %}"{% endblock %}
+{% block bottom1 %}"bi bi-journal-bookmark-fill"{% endblock %}
+{% block name1 %}Материалы курса{% endblock %}
+
+{% block url2 %}"{% url 'course_homework_home' homework.course.id %}"{% endblock %}
+{% block bottom2 %}"bi bi-list-task"{% endblock %}
+{% block name2 %}Домашние задания курса{% endblock %}
+
+{% block url3 %}"{% url 'courses-detail' homework.course.id %}"{% endblock %}
+{% block bottom3 %}"bi bi-arrow-left-circle-fill"{% endblock %}
+{% block name3 %}Вернуться к курсу{% endblock %}
+
+
+{% block title %}Удаление задания {{ homework.title }}{% endblock %}
+
+
+{% block content %}
+
+
+
+<div class="add_update_delete">
+     <form method="post">
+         <h3> Вы действительно хотите удалить задание: </h3>
+         <h6> {{ homework.title }}</h6>
+         </br>
+         <h5> По курсу:</h5>
+         <h6> {{ homework.course.title }}</h6>
+         </br>
+         {% csrf_token %}
+         <button class="btn btn-success" type="submit">Удалить задание</button>
+     </form>
+</div>
+
+
+{% endblock %}

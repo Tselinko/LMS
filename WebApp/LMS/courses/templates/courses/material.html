@@ -1,0 +1,40 @@
+{% extends 'courses/course_layout.html' %}
+
+{% block title %}{{ material.title }}{% endblock %}
+
+{% block url1 %}"{% url 'courses-detail' material.course.id %}"{% endblock %}
+{% block bottom1 %}"bi bi-info-circle-fill"{% endblock %}
+{% block name1 %}Информация о курсе{% endblock %}
+
+{% block url2 %}"{% url 'course_homework_home' material.course.id %}"{% endblock %}
+{% block bottom2 %}"bi bi-list-task"{% endblock %}
+{% block name2 %}Домашние задания курса{% endblock %}
+
+{% block url3 %}"{% url 'course_material_home' material.course.id %}"{% endblock %}
+{% block bottom3 %}"bi bi-journal-bookmark-fill"{% endblock %}
+{% block name3 %}К материалам курса{% endblock %}
+
+<!--{% block first_bottom %} <a href="{% url 'courses-detail' material.course.id %}"><li>О курсе</li></a> {% endblock %}-->
+<!--{% block second_bottom %} <a href="{% url 'course_homework_home' material.course.id %}"><li>Домашние задания курса</li></a></br> {% endblock %}-->
+<!--{% block therd_bottom %} <a class="btn btn-danger" href="{% url 'course_material_home' material.course.id %}">&#8592 К материалам курса </a>  {% endblock %}-->
+
+{% block content %}
+</br>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-body">
+            <h5> {{ material.course.title }}: </h5>
+            <h6>{{ material.title }}</h6></br>
+            <h5>Описание материала:</h5>
+            <a>{{ material.description }}</a></br>
+            <h5>Дата публикации:</h5>
+            <a>{{ material.date }}</a>
+        </div>
+        </br>
+        <div class="card card-body">
+            <h5> {{ material.material_сontent }} </h5>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

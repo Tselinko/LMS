@@ -1,0 +1,58 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Информация о группе {{ study_group.group_number }}{% endblock %}
+
+{% block content %}
+
+<div class="grid group">
+	<div class="grid-item teachers">
+		<div class="card card-body">
+			<h5> Изучаемые курсы: </h5>
+			{% for el in study_group.courses.all %}
+			<div class="card person">
+				<div class="panel_teachers">
+					<img src="{{ el.course_avatar.url }}" alt="Аватар курса">
+					<span class="name_teachers" href="{% url 'courses-detail' el.id %}"> Название курса: </br> {{ el.title }} </br></span>
+					<p>
+						<a> {{ el.anons }} </a></br>
+						<a href="{% url 'courses-detail' el.id %}"> Перейти к курсу  </a>
+					</p>
+				</div>
+			</div>
+			{% endfor %}
+	    </div>
+	</div>
+	<div class="grid-item students">
+		<div class="card card-body">
+			<h5> Студенты группы: </h5>
+			{% for el in study_group.members.all %}
+			<div class="card person">
+				<asside class="panel_teachers">
+					<img src="{{ el.avatar.url }}" alt="Слушатель курса">
+					<span class="name_teachers"> {{ el.name }} {{ el.surname }}</span>
+					<p>
+						<a href="{% url 'profile' el.login %}"> Профиль студента | </a>
+						{% if profile.vk_url %}
+						<a href="{{ el.vk_url }}"> VK |</a>
+						{% endif %}
+
+						{% if profile.fb_url %}
+							<a  href="{{ el.fb_url }}"> Facebook |</a>
+						{% endif %}
+
+						{% if profile.linkedin_url %}
+							<a href="{{ el.linkedin_url }} "> LinkedIn |</a>
+						{% endif %}
+
+						{% if profile.instagram_url %}
+							<a href="{{ el.instagram_url }}"> Instagram </a>
+						{% endif %}
+					</p>
+				</asside>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+{% endblock %}

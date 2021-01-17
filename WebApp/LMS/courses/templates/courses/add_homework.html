@@ -1,0 +1,15 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Загрузка домашней работы{% endblock %}
+
+{% block content %}
+
+<div class="add_update_delete">
+     <form method="post">
+         {% csrf_token %}
+         {{ form }}<br>
+         <button class="btn btn-warning" type="submit">Загрузить работу</button>
+
+        </form>
+</div>
+{% endblock %}

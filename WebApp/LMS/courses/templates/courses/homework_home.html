@@ -1,0 +1,65 @@
+{% extends 'courses/course_layout.html' %}
+
+{% block title %}Курсы на изучении{% endblock %}
+
+{% block url1 %}"{% url 'course_material_home' course_homeworks.id %}"{% endblock %}
+{% block bottom1 %}"bi bi-journal-bookmark-fill"{% endblock %}
+{% block name1 %}Материалы курса{% endblock %}
+
+{% block url2 %}"{% url 'course_homework_home' course_homeworks.id %}"{% endblock %}
+{% block bottom2 %}"bi bi-list-task"{% endblock %}
+{% block name2 %}Домашние задания курса{% endblock %}
+
+{% block url3 %}"{% url 'courses-detail' course_homeworks.id %}"{% endblock %}
+{% block bottom3 %}"bi bi-arrow-left-circle-fill"{% endblock %}
+{% block name3 %}Вернуться к курсу{% endblock %}
+
+{% block extra %}
+{% if request.user.is_teacher %}
+        <a href="{% url 'create_homework' course_homeworks.id %}">
+            <div class="menuitem">
+                <div class="icon"><i class="bi bi-plus-square-fill"></i></div>
+                <div class="text"><span>Добавить задание</span></div>
+            </div>
+        </a>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="news-feed">
+        <h1>Домашние задания по курсы {{ course_homeworks.title }}</h1>
+        {% if course_homeworks.homeworks.all %}
+            {% for el in course_homeworks.homeworks.all %}
+                {% if el.get_begin_date or request.user.is_teacher %}
+                    {% if el.date_of_beggining or request.user.is_teacher %}
+                        <div class="alert alert-warning">
+                            <h3>{{ el.title }}</h3>
+                            <p>{{ el.date_of_beggining }}</p>
+                            <p>Срок сдачи: {{ el.deadline }}</p>
+                            <a href="{% url 'homeworks-detail' el.id %}" class="btn btn-warning">Смотреть детальнее</a>
+                            {% if request.user.is_authenticated %}
+                            {% if not request.user.is_teacher %}
+                            {% for gr in homework.course.course_group.all %}
+                                {% for per in gr.members.all %}
+                                    {% if request.user == per %}
+                                        <a href="{% url 'add_homework' el.id %}" class="btn btn-warning">Загрузить работу</a>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                            {% else %}
+                                <a href="{% url 'update_homework' el.id %}" class="btn btn-warning">Редактировать задание</a>
+                                <a href="{% url 'delete_homework' el.id %}" class="btn btn-warning">Удалить задание</a>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+        <div class="home-text">
+            <h2>Пока у курса нет домашних заданий, но скоро они появятся!</h2>
+        </div>
+        {% endif %}
+
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Учебные курсы{% endblock %}
+
+{% block content %}
+    <div class="news-feed">
+        <h1>Перечень преподаваемых курсов</h1>
+        {% if courses %}
+            {% for el in courses %}
+                <div class="alert alert-warning">
+                    <h3>{{ el.title }}</h3>
+                    <p>Краткое описание курса: </br> {{ el.anons }}</p>
+                    <a href="{% url 'courses-detail' el.id %}" class="btn btn-warning">Смотреть детальнее</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="news-feed">
+                <h1>В данный момент нет активных курсов!</h1>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

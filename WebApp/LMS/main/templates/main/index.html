@@ -1,0 +1,28 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Домашняя страница LMS{% endblock %}
+
+{% block content %}
+    <div class="news-feed">
+        <h1>Добро пожаловать на сайт LMS!</h1>
+        <div class="home-text">Данный сайт представляет собой LMS (learning management system) -  это программное приложение для администрирования учебных курсов в рамках дистанционного обучения полном объеме,
+            что особенно актуально в период коронавируса.</div>
+        {% if not request.user.is_authenticated %}
+            <div class="home-text">Для взаимодействия с системой войдите в вашу учетную запись или зарегестрируйтесь на сайте и дождитесь распределения в одну из учебных групп.</div>
+
+            <div class="home-text">
+                <a href="{% url 'login' %}"><button class="btn btn-warning">Вход</button></a>
+                <a href="{% url 'registration' %}"><button class="btn btn-warning">Регистрация</button></a>
+
+        {% else %}
+                <div class="home-text">Вы имеете доступ к просмотру материалов и заданий всех курсов, чтобы загружать свои решения дождить распределения в одну из учебных групп. </div>
+        {% endif %}
+        </div>
+
+    </div>
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,442 @@
+body {
+    background: rgb(255, 255, 255);
+}
+
+.panel {
+    float: left;
+    position: fixed;
+    z-index: 2;
+    background: rgb(240, 240, 240);
+    width: 250px;
+    padding: 0;
+    height: 100vh;
+    color: black;
+    border-right: chartreuse;
+}
+
+.header {
+    width: 100%;
+    height: 60px;
+    background: rgb(240, 240, 240);
+    position: relative;
+}
+
+.header div {
+}
+
+.header .logo {
+    position: absolute;
+    height: 40px;
+    width: 60px;
+    /* background: gray; */
+    margin: 10px 10px;
+}
+
+.header img {
+    height: inherit;
+}
+
+.header .text {
+    height: 40px;
+    width: 150px;
+    /* background: gray; */
+    position: absolute;
+    top: 0;
+    left: 85px;
+    margin: 10px 0px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.header .text span {
+    height: inherit;
+    font-size: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.menu {
+    margin-top: 30px;
+    text-decoration: none;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
+
+.menu a:active {
+    background-color: gray;
+}
+
+.menuitem {
+    display: flex;
+    width: 100%;
+    height: 30px;
+    transition: background-color 0.2s ease-out;
+    text-decoration: none;
+}
+
+.menuitem:hover {
+    background-color: rgb(220, 220, 220);
+}
+
+.menuitem .icon {
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.menuitem .fas {
+    font-size: 16px;
+    display: flex;
+}
+
+.menuitem .text {
+    height: 30px;
+    font-size: 16px;
+    color: rgb(100,100,100);
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth {
+    float: top;
+    height: 60px;
+    color: black;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    border-bottom: 2px solid rgba(255, 255, 255, 1.0);
+    position: fixed;
+    z-index: 1;
+}
+
+.auth a {
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.btn-warning {
+    background-color: rgb(230, 230, 230);
+    border-style: none;
+}
+
+main {
+    margin-left: 250px;
+    overflow: auto;
+    height: 1fr;
+}
+
+main .features {
+    float: left;
+    color: black;
+    margin-top: 100px;
+    text-align: center;
+    width: 100%;
+}
+
+main .features h1 {font-size: 50px;}
+main .features p {max-width: 400px; margin: 20px auto}
+
+registration .features {
+    float: left;
+    color: black;
+    margin-top: 100px;
+    text-align: center;
+    width: 75%;
+}
+
+registration .features h1 {font-size: 50px;}
+registration .features p {max-width: 400px; margin: 20px auto}
+
+.news-feed {
+    margin-top: 60px;
+}
+
+.alert-warning{
+    float: left;
+    clear: both;
+    width: 90%;
+    margin: 20px 5%;
+    text-align: left;
+    padding: 15px;
+}
+
+.alert {
+    border-radius: 15px;
+}
+
+.news-feed h1 {
+    color: rgb(100, 100, 100);
+    font-weight: bold;
+    margin-left: 5%;
+}
+
+.alert-warning h3 {
+    color: rgb(100, 100, 100);
+    font-weight: bold;
+}
+
+.alert-warning p {
+    color: rgb(100, 100, 100);
+}
+
+.grid {
+    display: grid;
+    grid-gap: 15px;
+    justify-content: space-evenly;
+    padding: 60px 15px;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+}
+
+.course {
+    grid-template-columns: 250px 1fr 1fr 300px;
+    grid-template-rows: auto auto;
+}
+
+.grid-item {   display: inline-grid;}
+.course .course-profile {grid-area: 1 / 1 / 2 / 2;}
+.course .info {grid-area: 1 / 2 / 2 / 5;}
+.course .teachers {grid-area: 2 / 1 / 3 / 3;}
+.course .students {grid-area: 2 / 3 / 3 / 5;}
+
+.course .course-pic{
+	width: 100%;
+	height: auto;
+	margin: auto;
+	border-radius: 5px;
+    margin: 5px 0px;
+}
+.card{
+    margin-top: 15px;
+    border-radius: 15px;
+    height:auto;
+    background-color: rgb(240, 240, 240);
+    border-width: 0;
+}
+
+#materials {
+    margin-bottom: 5px;
+}
+
+.person {
+    background-color: white;
+}
+
+.card-doby {
+    padding: 15px;
+}
+
+.panel_teachers img {
+    width: 60px;
+    float: left;
+	margin-right: 20px;
+	border-radius: 50%;
+}
+
+.panel_teachers .name_teachers {
+	text-align: right;
+	margin-top: 1000px;
+
+}
+
+.panel_teachers {
+    float: left;
+    background: write;
+    width: 80%;
+    padding: 2%;
+    height: auto;
+    color: black;
+	border-color: black;
+}
+
+.hw {
+    width: 100%;
+    padding: 60px 0px;
+}
+
+.row {
+    padding: 0px 15px;
+    margin: 0;
+    width: 100%;
+    margin-top: 60px;
+}
+
+.add_update_delete {
+    padding: 0px 15px;
+    margin: 0;
+    width: 100%;
+    margin-top: 60px;
+}
+
+form {
+    margin-left: 20%;
+    width: 900px;
+    margin-up: 50px;
+}
+
+#my-hw {
+    margin-top: 15px;
+}
+
+.commit .btn {
+    float: right;
+    display: inline-block;
+}
+
+.deadline-text {
+    display: inline-block;
+    height: 38px;
+    width: 70%;
+    margin: 0;
+}
+
+.deadline-text a {
+    height: inherit;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.calendar {
+	width: 50px;
+	height: 50px;
+	margin: auto;
+}
+
+.deadline img {
+    float: left;
+	margin-right: 20px;
+}
+
+.profile-pic{
+	max-width: 200px;
+	max-height:200px;
+	margin: auto auto;
+	border-radius: 50%;
+}
+
+.profile {
+    grid-template-columns: 400px 1fr;
+    grid-template-rows: auto auto;
+}
+
+.profile .icon {grid-area: 1 / 1 / 3 / 2;}
+.profile .name {grid-area: 1 / 2 / 2 / 3;}
+.profile .info {grid-area: 2 / 2 / 3 / 3;}
+
+.profile-settings form {
+    margin: 0;
+}
+
+.group {
+    padding: 60px 15px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.group .course-pic{
+    max-width: 200px;
+    max-height:200px;
+    margin: auto;
+    border-radius: 50%;
+}
+
+.menuitem2 {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    transition: background-color 0.2s ease-out;
+    text-decoration: none;
+}
+
+.menuitem2:hover {
+    background-color: rgb(220, 220, 220);
+}
+
+.menuitem2 .icon {
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.menuitem2 .fas {
+    font-size: 16px;
+    display: flex;
+}
+
+.menuitem2 .text {
+    height: 50px;
+    font-size: 14px;
+    color: rgb(100,100,100);
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menuitem3 {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    transition: background-color 0.2s ease-out;
+    text-decoration: none;
+}
+
+
+
+.menuitem3 .icon {
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    color: #007bff;
+}
+
+.menuitem3 .fas {
+    font-size: 16px;
+    display: flex;
+}
+
+.menuitem3 .text {
+    height: 50px;
+    font-size: 16px;
+    color: rgb(100,100,100);
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-text {
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-top: 20px;
+    font-size: 20px;
+    color: rgb(100,100,100);
+}
+
+.reg_log {
+    margin-top: 65px;
+}
+
+.reg_log_text {
+    margin-left: 40%;
+    font-size: 40px;
+    color: rgb(100,100,100);
+}
+
+.profitem {
+    margin-top: 5px;
+    font-size: 16px;
+    color: black;
+}

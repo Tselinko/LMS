@@ -1,0 +1,113 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Курс {{ course.title }}{% endblock %}
+
+
+{% block first_bottom %} <a href="{% url 'course_material_home' course.id %}" class="btn-btn-danger">Материалы курса</a> {% endblock %}
+{% block second_bottom %} <a href="{% url 'course_homework_home' course.id %}" class="btn-btn-info">Домашние задания курса</a> {% endblock %}
+{% block therd_bottom %} <a href=""><i class="fas fa-info"></i><li>К списку курсов</li></a> {% endblock %}
+
+{% block content %}
+<div class="grid course">
+	<div class="grid-item course-profile">
+		<div class="card card-body">
+			<a class="top-item btn btn-warning" href="{% url 'courses_home' %}"> &#8592 К списку курсов </a>
+			<img class="course-pic" src="{{ course.course_avatar.url }}" >
+			<a id="materials" class="btn btn-danger" href="{% url 'course_material_home' course.id %}">Материалы курса</a>
+        	<a class="bot-item btn btn-info" href="{% url 'course_homework_home' course.id %}">Домашние задания курса</a>
+		</div>
+	</div>
+    <div class="grid-item info">
+        <div class="card card-body">
+            <h5> Добро пожаловать на страницу курса: </h5>
+            <h6>{{ course.title }}</h6></br>
+            <h5>Описание курса:</h5>
+            <a>{{ course.description }}</a>
+        </div>
+    </div>
+	<div class="grid-item teachers">
+		<div class="card card-body">
+			<h5> Преподаватели курса: </h5>
+			{% for profile in course.teachers.all %}
+			<div class="card person">
+				<asside class="panel_teachers">
+					<img src="{{ profile.avatar.url }}" alt="Преподаватель">
+					<span class="name_teachers"> {{ profile.name }} {{ profile.surname }}</span>
+					<p>
+						{% if request.user.is_authenticated %}
+						<a href="{% url 'profile' profile.login %}"> Профиль преподавателя | </a>
+						{% if profile.vk_url %}
+						<a href="{{ profile.vk_url }}"> VK |</a>
+						{% endif %}
+
+						{% if profile.fb_url %}
+							<a  href="{{ profile.fb_url }}"> Facebook |</a>
+						{% endif %}
+
+						{% if profile.linkedin_url %}
+							<a href="{{ profile.linkedin_url }} "> LinkedIn |</a>
+						{% endif %}
+
+						{% if profile.instagram_url %}
+							<a href="{{ profile.instagram_url }}"> Instagram </a>
+						{% endif %}
+						{% endif %}
+					</p>
+				</asside>
+			</div>
+			</br>
+			{% endfor %}
+
+			{% if request.user.is_authenticated %}
+			<h5> Доверенные лица: </h5>
+			{% for profile in course.confidants.all %}
+			<div class="card person">
+				<asside class="panel_teachers">
+					<img src="{{ profile.avatar.url }}" alt="Преподаватель">
+					<span class="name_teachers"> {{ profile.name }} {{ profile.surname }}</span>
+					<p>
+						<a href="{% url 'profile' profile.login %}"> Профиль студента | </a>
+						{% if profile.vk_url %}
+						<a href="{{ profile.vk_url }}"> VK |</a>
+						{% endif %}
+
+						{% if profile.fb_url %}
+							<a  href="{{ profile.fb_url }}"> Facebook |</a>
+						{% endif %}
+
+						{% if profile.linkedin_url %}
+							<a href="{{ profile.linkedin_url }} "> LinkedIn |</a>
+						{% endif %}
+
+						{% if profile.instagram_url %}
+							<a href="{{ profile.instagram_url }}"> Instagram </a>
+						{% endif %}
+					</p>
+				</asside>
+			</div>
+
+			{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+	<div class="grid-item students">
+		<div class="card card-body">
+			<h5> Группы проходящие данный курс: </h5>
+			{% for profile in course.course_group.all %}
+			<div class="card person">
+				<asside class="panel_teachers">
+					<img src="{{ profile.group_avatar.url }}" alt="Аватар группы">
+					<span class="name_teachers"> Номер группы: {{ profile.group_number }} | </span>
+						<a href="{% url 'group-info' profile.id %}"> Подробнее о группе  </a>
+						</br><a> Факультет: {{ profile.department_name }}  </a>
+
+				</asside>
+			</div>
+			{% endfor %}
+		</div>
+
+	</div>
+
+
+</div>
+{% endblock %}

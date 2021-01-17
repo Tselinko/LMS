@@ -1,0 +1,74 @@
+{% extends 'courses/course_layout.html' %}
+
+{% block title %}Курсы на изучении{% endblock %}
+
+
+{% block url1 %}"{% url 'course_material_home' course_materials.id %}"{% endblock %}
+{% block bottom1 %}"bi bi-journal-bookmark-fill"{% endblock %}
+{% block name1 %}Материалы курса{% endblock %}
+
+{% block url2 %}"{% url 'course_homework_home' course_materials.id %}"{% endblock %}
+{% block bottom2 %}"bi bi-list-task"{% endblock %}
+{% block name2 %}Домашние задания курса{% endblock %}
+
+{% block url3 %}"{% url 'courses-detail' course_materials.id %}"{% endblock %}
+{% block bottom3 %}"bi bi-arrow-left-circle-fill"{% endblock %}
+{% block name3 %}Вернуться к курсу{% endblock %}
+
+{% block extra %}
+{% for el in course_materials.confidants.all %}
+    {% if request.user == el %}
+        <a href="{% url 'create_material' course_materials.id %}">
+            <div class="menuitem">
+                <div class="icon"><i class="bi bi-plus-square-fill"></i></div>
+                <div class="text"><span>Добавить материал</span></div>
+            </div>
+        </a>
+    {% endif %}
+{% endfor %}
+
+{% if request.user.is_teacher %}
+        <a href="{% url 'create_material' course_materials.id %}">
+            <div class="menuitem">
+                <div class="icon"><i class="bi bi-plus-square-fill"></i></div>
+                <div class="text"><span>Добавить материал</span></div>
+            </div>
+        </a>
+{% endif %}
+
+{% endblock %}
+<!--{% block first_bottom %} <a href="{% url 'course_material_home' course_materials.id %}"><li>Материалы курса</li></a> {% endblock %}-->
+<!--{% block second_bottom %} <a href="{% url 'course_homework_home' course_materials.id %}"><li>Домашние задания курса</li></a></br> {% endblock %}-->
+<!--{% block therd_bottom %} <a class="btn btn-danger" href="{% url 'courses-detail' course_materials.id %}">&#8592 Назад к курсу</a> {% endblock %}-->
+
+
+{% block content %}
+    <div class="news-feed">
+        <h1>Материалы по курсы {{ course_materials.title }}</h1>
+        {% if course_materials.materials.all %}
+            {% for el in course_materials.materials.all %}
+                <div class="alert alert-warning">
+                    <h3>{{ el.title }}</h3>
+                    <p>Опубликовано: {{ el.date }}</p>
+                    <a href="{% url 'materials-detail' el.id %}" class="btn btn-warning">Смотреть детальнее</a>
+                    {% for el in course_materials.confidants.all %}
+                        {% if request.user == el %}
+                            <a href="{% url 'update_material' el.id %}" class="btn btn-warning">Редактировать материал</a>
+                            <a href="{% url 'delete_material' el.id %}" class="btn btn-warning">Удалить материал</a>
+                        {% endif %}
+                    {% endfor %}
+                    {% if request.user.is_teacher %}
+                        <a href="{% url 'update_material' el.id %}" class="btn btn-warning">Редактировать материал</a>
+                        <a href="{% url 'delete_material' el.id %}" class="btn btn-warning">Удалить материал</a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+        <div class="home-text">
+            <h2>Пока у курса нет материалов, но скоро они появятся!</h2>
+        </div>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

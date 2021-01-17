@@ -1,0 +1,67 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Страница пользователя {{ profile.login }}{% endblock %}
+
+{% block content %}
+
+<div class="grid profile">
+	<div class="icon grid-item card card-body">
+		{% if request.user == profile %}
+			<a class="btn btn-warning" href="{% url 'profile-settings' profile.login %}"> Редактировать профиль</a><hr>
+		{% endif %}
+		<h3 style="text-align: center">Личный кабинет {% if not profile.is_teacher %} пользователя {% else %} преподавателя {% endif %}</h3>
+		<hr>
+		<img class="profile-pic" src="{{ profile.avatar.url }}" >
+
+	</div>
+	<div class="name grid-item card card-body">
+		<h1>{{ profile.name }} {{ profile.surname }}</h1>
+		{% if profile.vk_url or profile.fb_url or profile.linkedin_url or profile.instagram_url %}
+		<p class="small text-muted">
+			{% if profile.vk_url %}
+				<a href="{{ profile.vk_url }}"> VK |</a>
+			{% endif %}
+
+			{% if profile.fb_url %}
+				<a  href="{{ profile.fb_url }}"> Facebook |</a>
+			{% endif %}
+
+			{% if profile.linkedin_url %}
+				<a href="{{ profile.linkedin_url }} "> LinkedIn |</a>
+			{% endif %}
+
+			{% if profile.instagram_url %}
+				<a href="{{ profile.instagram_url }}"> Instagram </a>
+			{% endif %}
+			{% else %}
+			<a>Пользователь пока не указал ссылок на социальные сети :(</a>
+			{% endif %}
+			{% if profile.phone_number %}
+				<br/><a> {{ profile.phone_number }}</a>
+			{% endif %}
+
+		</p>
+	</div><br>
+	{% if not profile.is_teacher %}
+		<div class="info grid-item card card-body">
+
+			{% for el in request.user.member_group.all %}
+			<a href="{% url 'group-info' el.id %}"><div class="profitem"> Учебная группа: {{ el.group_number }}</div></a></br>
+				<p>Год обучения: {{ el.study_year_number }}</p>
+				{% if el.department_name %}
+					<p> Факультет: {{ el.department_name }}</p>
+				{% endif %}
+			{% endfor %}
+			<p> Год начала обучения: {{ profile.begin_year }}</p>
+			<p> Уровень обучения: {{ profile.degree }}</p>
+			<p> Форма обучения: {{ profile.form }}</p>
+			{% if request.user == profile %}
+				<p> Источник финансирования: {{ profile.pay }}</p>
+			{% endif %}
+	{% endif %}
+
+	</div>
+</div>
+
+
+{% endblock %}

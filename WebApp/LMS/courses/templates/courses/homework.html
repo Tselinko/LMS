@@ -1,0 +1,96 @@
+{% extends 'courses/course_layout.html' %}
+{% load static %}
+
+{% block title %}{{ homework.title }}{% endblock %}
+
+{% block url1 %}"{% url 'courses-detail' homework.course.id %}"{% endblock %}
+{% block bottom1 %}"bi bi-info-circle-fill"{% endblock %}
+{% block name1 %}Информация о курсе{% endblock %}
+
+{% block url2 %}"{% url 'course_material_home' homework.course.id %}"{% endblock %}
+{% block bottom2 %}"bi bi-journal-bookmark-fill"{% endblock %}
+{% block name2 %}Материалы курса{% endblock %}
+
+{% block url3 %}"{% url 'course_homework_home' homework.course.id %}"{% endblock %}
+{% block bottom3 %}"bi bi-list-task"{% endblock %}
+{% block name3 %}К заданиям курса{% endblock %}
+
+<!--{% block first_bottom %} <a href="{% url 'courses-detail' homework.course.id %}"><li>О курсе</li></a> {% endblock %}-->
+<!--{% block second_bottom %} <a href="{% url 'course_material_home' homework.course.id %}"><li>Материалы курса</li></a></br> {% endblock %}-->
+<!--{% block therd_bottom %} <a class="btn btn-danger" href="{% url 'course_material_home' homework.course.id %}">&#8592 К материалам курса </a>  {% endblock %}-->
+
+{% block content %}
+<div xmlns="http://www.w3.org/1999/html">
+    <div class="row">
+        <div class="card card-body">
+            <h5> {{ homework.course.title }}: </h5>
+            <h6>{{ homework.title }}</h6></br>
+            <h5>Описание материала:</h5>
+            <a>{{ homework.description }}</a></br>
+            <div class="deadline">
+                <img class="calendar" src="{% static 'courses/img/calendar.jpg' %}">
+                {% if homework.deadline %}
+                <span class="name_teachers"> Срок сдачи: </br> {{ homework.deadline }}</span>
+                {% else %}
+                <span class="name_teachers"> Срок сдачи: </br> Бессрочно </span>
+                {% endif %}
+            </div>
+            {% if request.user.is_authenticated %}
+                {% if not request.user.is_teacher %}
+                    {% for gr in homework.course.course_group.all %}
+                        {% for per in gr.members.all %}
+                            {% if request.user == per %}
+                                {% if homework.get_date %}
+                                    <div class="commit">
+                                        <div class="deadline-text">
+                                            <a>Обратите внимание, что повторная загурзка задания заменяет предыдущую отправку!</a>
+                                        </div>
+                                        <a class="btn btn-danger" href="{% url 'add_homework' homework.id %}">Загрузить свое домашнее задание</a>
+                                    </div>
+                                {% else %}
+                                    <div class="deadline-text">
+                                        <a> Загрузка работ невозможна после окончания срока сдачи! </a>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
+        </div>
+
+    </div>
+    {% if not request.user.is_teacher %}
+        {% for el in homework.solution.all %}
+            {% if request.user  == el.author %}
+                <div id="my-hw" class="row">
+                    <div class="card card-body">
+                        <h5> Ваше решение: </h5>
+                        <h6>{{ el.material }}</h6>
+
+                        <h6> Дата отправки: </h6>
+                        <h7>{{ el.date }}</h7>
+
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        {% for el in homework.solution.all %}
+                <div id="my-hw" class="row">
+                    <div class="card card-body">
+                        <h5> Автор решение: </h5>
+                        <h6>{{ el.author }}</h6>
+                        </br>
+                        <h6> Дата отправки: </h6>
+                        <h7>{{ el.date }}</h7>
+                        </br>
+                        <h6> Текст решения: </h6>
+                        <h7>{{ el.material }}</h7>
+
+                    </div>
+                </div>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}
