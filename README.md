@@ -22,13 +22,15 @@ source venv/bin/activate
 - lone the repo
 git clone https://github.com/Tselinko/LMS.git
 
---Use the requirements file in the repo
+-Use the requirements file in the repo
 pip install -r lms/requirements.txt
 
 - Run to start project
 
 python3 manage.py makemigrations
+
 python3 manage.py migrate
+
 python manage.py runserver
 
 The application is now installed. 
