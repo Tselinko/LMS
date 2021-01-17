@@ -34,3 +34,15 @@ pip install -r lms/requirements.txt
   python manage.py runserver
 
 The application is now installed. 
+
+# Demo testing
+
+21 profiles are already created:
+
+- from A@gmail.com to AAAAAAAAAA.@gmail.com and from C@gmail.com to CCCCC@gmail.com - students
+
+- from B@gmail.com to BBBBB.@gmail.com - teachers
+
+- admin@gmail.com - superuser
+
+All profiles have the same password: Tsel2506
