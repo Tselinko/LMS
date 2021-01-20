@@ -5,8 +5,6 @@ Requires Python 3.6
 
 Rest of the requirements should be installable with pip.
 
-Uses Postgres by default. As of now there isn't anything Postgres specific in the codebase so it should be portable to Mysql just by flipping the database engine.
-
 # Installation
 - Create a project directory
 mkdir django-lms
