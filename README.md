@@ -27,7 +27,7 @@ pip install -r lms/requirements.txt
 
 - Run to start project
   
-  cd LMS/WebApp/LMS
+  cd WebApp/LMS
 
   python3 manage.py makemigrations
 
