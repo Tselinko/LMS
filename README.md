@@ -26,6 +26,8 @@ git clone https://github.com/Tselinko/LMS.git
 pip install -r lms/requirements.txt
 
 - Run to start project
+  
+  cd LMS/WebApp/LMS
 
   python3 manage.py makemigrations
 
